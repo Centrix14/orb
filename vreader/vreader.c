@@ -3,6 +3,8 @@
 
 #include "vreader.h"
 
+/* Variant predicates */
+
 bool orb_vreader_is_ready(struct orb_vreader reader) {
     return (reader.token[0] == '\0')
         && (reader.state == orb_vreader_ready)
@@ -24,6 +26,8 @@ bool orb_vreader_is_reading(struct orb_vreader reader) {
         && (reader.error == orb_vreader_ok);
 }
 
+/* Invariants */
+
 bool orb_vreader_check(struct orb_vreader reader) {
     int8_t condition =
         orb_vreader_is_ready(reader)
@@ -35,4 +39,18 @@ bool orb_vreader_check(struct orb_vreader reader) {
         | (condition == 0b0010)
         | (condition == 0b0100)
         | (condition == 0b1000);
+}
+
+/* Variant changing methods */
+
+void orb_vreader_init(struct orb_vreader *blank) {
+    blank->token[0] = '\0';
+
+    blank->state = orb_vreader_ready;
+    blank->error = orb_vreader_ok;
+}
+
+void orb_vreader_deinit(struct orb_vreader *reader) {
+    reader->state = orb_vreader_done;
+    reader->error = orb_vreader_ok;
 }
