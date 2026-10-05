@@ -34,4 +34,7 @@ bool orb_vreader_is_done(struct orb_vreader reader);
 bool orb_vreader_is_failed(struct orb_vreader reader);
 bool orb_vreader_is_reading(struct orb_vreader reader);
 
+void orb_vreader_init(struct orb_vreader *blank);
+void orb_vreader_deinit(struct orb_vreader *reader);
+
 #endif
