@@ -241,6 +241,43 @@ void refuse_read_after_done() {
     orb_vreader_deinit(&r);
 }
 
+void live() {
+    symbol *values = "12 0x3b1 0b1010";
+
+    struct orb_vreader r;
+    orb_vreader_init(&r);
+
+    int index = 0, token_counter = 0;
+    while (index < strlen(values)) {
+        orb_vreader_read(&r, values[index]);
+
+        if (orb_vreader_is_done(r)) {
+            switch (token_counter) {
+            case 0:
+                assert(!strcmp(r.token, "12"));
+                break;
+            case 1:
+                assert(!strcmp(r.token, "0x3b1"));
+                break;
+            case 2:
+                assert(!strcmp(r.token, "0b1010"));
+                break;
+            }
+
+            orb_vreader_init(&r);
+            token_counter++;
+        }
+
+        if (orb_vreader_is_failed(r)) {
+            assert(("Unexpected error occured.", false));
+        }
+
+        index++;
+    }
+
+    orb_vreader_deinit(&r);
+}
+
 int main(void) {
     init_deinit_integration();
     init_deinit_correctness();
@@ -267,6 +304,8 @@ int main(void) {
     done_reading_2();
     done_reading_3();
     done_reading_4();
+
+    live();
 
     return 0;
 }
