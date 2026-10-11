@@ -19,11 +19,10 @@ length ::= value
 ```
 
 # Roadmap
-- [ ] vreader - value reader
-  - [ ] base interface
-    - [ ] token write bounds check
-  - [ ] decimal reading
-  - [ ] hexidecimal reading
-  - [ ] binary reading
-  - [ ] stopping
+- [x] vreader - value reader
+  - [x] base interface
+  - [x] decimal reading
+  - [x] hexidecimal reading
+  - [x] binary reading
+  - [x] stopping
 - [ ] treader - type reader
