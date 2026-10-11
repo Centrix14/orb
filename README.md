@@ -13,9 +13,9 @@ value ::= dec_val | hex_val | bin_val
 dec_val ::= <digits>
 hex_val ::= 0x<digits>
 bin_val ::= 0b<bits>
-type ::= sign length
-sigh ::= u | s
+type ::= length measure
 length ::= value
+measure ::= b | B
 ```
 
 # Roadmap
@@ -25,4 +25,5 @@ length ::= value
   - [x] hexidecimal reading
   - [x] binary reading
   - [x] stopping
+- [ ] mreader - measure reader
 - [ ] treader - type reader
