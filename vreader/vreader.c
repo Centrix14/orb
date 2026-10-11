@@ -8,6 +8,7 @@
 
 bool orb_vreader_is_ready(struct orb_vreader reader) {
     return (reader.token[0] == '\0')
+        && (reader.index == 0)
         && (reader.state == orb_vreader_ready)
         && (reader.error == orb_vreader_ok);
 }
@@ -30,16 +31,20 @@ bool orb_vreader_is_reading(struct orb_vreader reader) {
 /* Invariants */
 
 bool orb_vreader_check(struct orb_vreader reader) {
-    int8_t condition =
+    int8_t variant =
         orb_vreader_is_ready(reader)
         | orb_vreader_is_done(reader) << 1
         | orb_vreader_is_failed(reader) << 2
         | orb_vreader_is_reading(reader) << 3;
 
-    return (condition == 0x1)
-        || (condition == 0x2)
-        || (condition == 0x4)
-        || (condition == 0x8);
+    bool is_valid_index = (reader.index <= TOKEN_LENGTH);
+    bool is_valid_variant =
+        (variant == 0x1)
+        || (variant == 0x2)
+        || (variant == 0x4)
+        || (variant == 0x8);
+
+    return is_valid_index && is_valid_variant;
 }
 
 /* Variant changing methods */
