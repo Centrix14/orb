@@ -2,7 +2,7 @@ DIR = .
 
 CC = gcc
 
-TESTFLAGS = -Wall -O0 -ggdb
+TESTFLAGS = -O0 -ggdb -Wall --pedantic-errors
 TESTSRC = test.c
 TESTBIN = t
 
