@@ -269,7 +269,7 @@ void live() {
         }
 
         if (orb_vreader_is_failed(r)) {
-            assert(("Unexpected error occured.", false));
+            assert("Unexpected error occured." == false);
         }
 
         index++;
