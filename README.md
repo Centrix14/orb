@@ -7,8 +7,8 @@ orb (operate with readable binaries) is the language and the tool for binary fil
 expr ::= comment | definition
 comment ::= # <some text> <new line>
 definition ::= manual_def | auto_def
-manual_def ::= value : type [;]
-auto_def ::= value;
+manual_def ::= value : type ;
+auto_def ::= value ;
 value ::= dec_val | hex_val | bin_val
 dec_val ::= <digits>
 hex_val ::= 0x<digits>
