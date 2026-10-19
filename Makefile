@@ -16,4 +16,8 @@ vreader-test:
 	$(CC) $(TESTFLAGS) -o $(DIR)/$(TESTBIN) $(DIR)/$(TESTSRC) $(DIR)/$(MODULE)
 	$(DIR)/$(TESTBIN)
 
-test: reader-test vreader-test
+mreader-test:
+	$(CC) $(TESTFLAGS) -o mreader/t mreader/test.c reader/reader.c mreader/mreader.c aux/aux.c
+	mreader/t
+
+test: reader-test vreader-test mreader-test
