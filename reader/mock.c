@@ -4,8 +4,10 @@
 #include "../aux/aux.h"
 
 /*
-  [0-9] - ready->reading | reading->reading
-  ; | space - reading->done
+  mock reads integers separated by space and semi-colon, it's state
+  logic if following:
+    [0-9]     - ready->reading | reading->reading
+    ; | space - reading->done
  */
 
 void orb_mock_read(struct orb_reader *reader, symbol value) {
