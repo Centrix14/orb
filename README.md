@@ -25,5 +25,6 @@ measure ::= b | B
   - [x] hexidecimal reading
   - [x] binary reading
   - [x] stopping
-- [ ] mreader - measure reader
+- [x] mreader - measure reader
+- [ ] refactor - unify vreader and mreader implementation
 - [ ] treader - type reader
