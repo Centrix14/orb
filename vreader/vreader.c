@@ -62,6 +62,8 @@ void orb_vreader_deinit(struct orb_vreader *reader) {
     reader->error = orb_vreader_ok;
 }
 
+/* orb_vreader_read supplement */
+
 bool __is_done(symbol value) {
     return value == ':'
         || value == ';'
