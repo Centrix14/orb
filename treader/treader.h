@@ -24,6 +24,7 @@ struct orb_treader {
 bool orb_treader_is_reading_length(struct orb_treader reader);
 bool orb_treader_is_reading_measure(struct orb_treader reader);
 bool orb_treader_is_failed(struct orb_treader reader);
+bool orb_treader_is_done(struct orb_treader reader);
 
 void orb_treader_init(struct orb_treader *blank);
 void orb_treader_deinit(struct orb_treader *reader);
