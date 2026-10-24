@@ -6,12 +6,12 @@
 
 #include "../reader/reader.h"
 #include "../vreader/vreader.h"
+#include "../mreader/mreader.h"
 #include "../aux/aux.h"
 
 enum orb_treader_state {
     orb_treader_reading_measure,
-    orb_treader_reading_length,
-    orb_treader_done = orb_reader_done
+    orb_treader_reading_length
 };
 
 struct orb_treader {
