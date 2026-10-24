@@ -65,6 +65,19 @@ void accept_measure_part() {
     orb_treader_deinit(&r);
 }
 
+void accept_type_definition() {
+    struct orb_treader r;
+    orb_treader_init(&r);
+
+    symbol *value = "16 b;";
+    for (int i = 0; i < strlen(value); i++) {
+        orb_treader_read(&r, value[i]);
+    }
+    assert(orb_treader_is_done(r));
+
+    orb_treader_deinit(&r);
+}
+
 int main(void) {
     accept_value_part();
     refuse_measure_only();
