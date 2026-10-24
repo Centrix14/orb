@@ -48,10 +48,28 @@ void accept_value_definition() {
     orb_treader_deinit(&r);
 }
 
+void accept_measure_part() {
+    struct orb_treader r;
+    orb_treader_init(&r);
+
+    symbol *value = "0xf b";
+    for (int i = 0; i < strlen(value); i++) {
+        orb_treader_read(&r, value[i]);
+
+        if (value[i] == ' ' || value[i] == 'b')
+            assert(orb_treader_is_reading_measure(r));
+        else
+            assert(orb_treader_is_reading_length(r));
+    }
+
+    orb_treader_deinit(&r);
+}
+
 int main(void) {
     accept_value_part();
     refuse_measure_only();
     accept_value_definition();
+    accept_measure_part();
 
     return 0;
 }
