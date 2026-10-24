@@ -33,6 +33,7 @@ void refuse_measure_only() {
 
 int main(void) {
     accept_value_part();
+    refuse_measure_only();
 
     return 0;
 }
