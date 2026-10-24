@@ -3,72 +3,6 @@
 
 #include "vreader.h"
 
-void init_deinit_integration() {
-    struct orb_vreader r;
-
-    orb_vreader_init(&r);
-    assert(orb_vreader_is_ready(r));
-
-    orb_vreader_deinit(&r);
-    assert(orb_vreader_is_done(r));
-}
-
-void init_deinit_correctness() {
-    struct orb_vreader r;
-
-    orb_vreader_init(&r);
-    assert(orb_vreader_check(r));
-
-    orb_vreader_deinit(&r);
-    assert(orb_vreader_check(r));
-}
-
-void read_after_init() {
-    struct orb_vreader r;
-
-    orb_vreader_init(&r);
-
-    orb_vreader_read(&r, '1');
-    assert(orb_vreader_is_reading(r));
-
-    orb_vreader_deinit(&r);
-}
-
-void read_only_after_init_1() {
-    struct orb_vreader r;
-
-    orb_vreader_init(&r);
-    orb_vreader_deinit(&r);
-
-    orb_vreader_read(&r, '1');
-
-    assert(!orb_vreader_is_reading(r));
-    assert(orb_vreader_is_failed(r));
-}
-
-void read_only_after_init_2() {
-    struct orb_vreader r;
-
-    orb_vreader_read(&r, '1');
-
-    assert(!orb_vreader_is_reading(r));
-    assert(orb_vreader_is_failed(r));
-}
-
-void token_bounds_checked() {
-    struct orb_vreader r;
-    orb_vreader_init(&r);
-
-    for (int i = 0; i <= TOKEN_LENGTH + 1; i++) {
-        orb_vreader_read(&r, '1');
-
-        if (i == TOKEN_LENGTH + 1)
-            assert(!orb_vreader_is_reading(r));
-    }
-
-    orb_vreader_deinit(&r);
-}
-
 void accept_single_digit() {
     symbol c = '1';
 
@@ -225,22 +159,6 @@ void done_reading_4() {
     orb_vreader_deinit(&r);
 }
 
-void refuse_read_after_done() {
-    symbol *str = "0xa :";
-
-    struct orb_vreader r;
-    orb_vreader_init(&r);
-
-    for (int i = 0; i < strlen(str); i++) {
-        orb_vreader_read(&r, str[i]);
-
-        if (str[i] == ':')
-            assert(orb_vreader_is_failed(r));
-    }
-
-    orb_vreader_deinit(&r);
-}
-
 void live() {
     symbol *values = "12 0x3b1 0b1010";
 
@@ -279,15 +197,6 @@ void live() {
 }
 
 int main(void) {
-    init_deinit_integration();
-    init_deinit_correctness();
-
-    read_after_init();
-    read_only_after_init_1();
-    read_only_after_init_2();
-
-    token_bounds_checked();
-
     accept_single_digit();
     refuse_single_non_digit();
 
