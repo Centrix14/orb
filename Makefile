@@ -16,8 +16,11 @@ vreader-test: SRC = $(DIR)/vreader.c $(COMMON_MODULES)
 mreader-test: DIR = mreader
 mreader-test: SRC = $(DIR)/mreader.c $(COMMON_MODULES)
 
-reader-test vreader-test mreader-test:
+treader-test: DIR = treader
+treader-test: SRC = $(DIR)/treader.c $(COMMON_MODULES)
+
+reader-test vreader-test mreader-test treader-test:
 	$(CC) $(TESTFLAGS) -o $(DIR)/$(TESTBIN) $(DIR)/$(TESTSRC) $(SRC)
 	$(DIR)/$(TESTBIN)
 
-test: reader-test vreader-test mreader-test
+test: reader-test vreader-test mreader-test treader-test
