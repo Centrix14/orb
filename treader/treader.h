@@ -5,6 +5,7 @@
 #include <stdbool.h>
 
 #include "../reader/reader.h"
+#include "../vreader/vreader.h"
 #include "../aux/aux.h"
 
 enum orb_treader_state {

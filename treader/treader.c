@@ -25,5 +25,6 @@ void orb_treader_deinit(struct orb_treader *reader) {
 }
 
 void orb_treader_read(struct orb_treader *reader, symbol value) {
-    
+    if (reader->state == orb_treader_reading_length)
+        orb_vreader_read(&reader->vreader, value);
 }
