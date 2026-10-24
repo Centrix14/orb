@@ -11,6 +11,11 @@ bool orb_treader_is_reading_measure(struct orb_treader reader) {
             || orb_reader_is_reading(reader.mreader));
 }
 
+bool orb_treader_is_reading(struct orb_treader reader) {
+    return orb_treader_is_reading_length(reader)
+        || orb_treader_is_reading_measure(reader);
+}
+
 bool orb_treader_is_failed(struct orb_treader reader) {
     return orb_reader_is_failed(reader.vreader)
         || orb_reader_is_failed(reader.mreader);
