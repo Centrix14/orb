@@ -12,9 +12,9 @@ void accept_value_part() {
         orb_treader_read(&r, value[i]);
 
         if (value[i] == ' ')
-            assert(orb_treader_is_measure_reading(r));
+            assert(orb_treader_is_reading_measure(r));
         else
-            assert(orb_treader_is_length_reading(r));
+            assert(orb_treader_is_reading_length(r));
     }
 
     orb_treader_deinit(&r);
