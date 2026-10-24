@@ -7,7 +7,8 @@ bool orb_treader_is_reading_length(struct orb_treader reader) {
 
 bool orb_treader_is_reading_measure(struct orb_treader reader) {
     return reader.state == orb_treader_reading_measure
-        && orb_reader_is_reading(reader.mreader);
+        && (orb_reader_is_ready(reader.mreader)
+            || orb_reader_is_reading(reader.mreader));
 }
 
 bool orb_treader_is_failed(struct orb_treader reader) {
@@ -32,4 +33,9 @@ void orb_treader_deinit(struct orb_treader *reader) {
 void orb_treader_read(struct orb_treader *reader, symbol value) {
     if (reader->state == orb_treader_reading_length)
         orb_vreader_read(&reader->vreader, value);
+    else if (reader->state == orb_treader_reading_measure)
+        orb_vreader_read(&reader->mreader, value);
+
+    if (orb_reader_is_done(reader->vreader))
+        reader->state = orb_treader_reading_measure;
 }
