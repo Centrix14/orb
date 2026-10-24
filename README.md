@@ -26,5 +26,6 @@ measure ::= b | B
   - [x] binary reading
   - [x] stopping
 - [x] mreader - measure reader
-- [ ] refactor - unify vreader and mreader implementation
-- [ ] treader - type reader
+- [x] refactor - unify vreader and mreader implementation
+- [x] treader - type reader
+- [ ] dreader - definition reader
