@@ -5,20 +5,19 @@ TESTSRC = test.c
 TESTBIN = t
 
 DIR = .
-GENERAL_MODULES = reader/reader.c aux/aux.c
+COMMON_MODULES = reader/reader.c aux/aux.c
 
-reader-test:
-	$(CC) $(TESTFLAGS) -o reader/t reader/test.c reader/reader.c reader/mock.c aux/aux.c
-	reader/t
+reader-test: DIR = reader
+reader-test: SRC = $(DIR)/mock.c $(COMMON_MODULES)
 
 vreader-test: DIR = vreader
-vreader-test: SRC = $(DIR)/vreader.c $(GENERAL_MODULES)
-vreader-test:
+vreader-test: SRC = $(DIR)/vreader.c $(COMMON_MODULES)
+
+mreader-test: DIR = mreader
+mreader-test: SRC = $(DIR)/mreader.c $(COMMON_MODULES)
+
+reader-test vreader-test mreader-test:
 	$(CC) $(TESTFLAGS) -o $(DIR)/$(TESTBIN) $(DIR)/$(TESTSRC) $(SRC)
 	$(DIR)/$(TESTBIN)
-
-mreader-test:
-	$(CC) $(TESTFLAGS) -o mreader/t mreader/test.c reader/reader.c mreader/mreader.c aux/aux.c
-	mreader/t
 
 test: reader-test vreader-test mreader-test
